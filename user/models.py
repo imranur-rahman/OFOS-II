@@ -13,3 +13,13 @@ class Customer(models.Model):
 
     def __str__(self):
         return self.email.__str__()
+
+
+class Area(models.Model):
+    # thana actually
+    name = models.CharField(max_length=30)
+    district = models.CharField(max_length=30)
+    postal_code = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name.__str__()
