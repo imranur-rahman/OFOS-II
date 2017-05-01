@@ -23,3 +23,13 @@ class Area(models.Model):
 
     def __str__(self):
         return self.name.__str__()
+
+
+class Restaurent(models.Model):
+    name = models.CharField(max_length=30)
+    area = models.ForeignKey(Area)
+    open_time = models.TimeField()
+    close_time = models.TimeField()
+
+    def __str__(self):
+        return self.name.__str__() + ', ' + self.area.name.__str__()

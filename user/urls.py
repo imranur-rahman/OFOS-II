@@ -10,5 +10,7 @@ urlpatterns = [
 
     url(r'^register/$', views.UserRegistrationFormView.as_view(), name='register'),
 
-    url(r'^logout/$', views.logOut, name='logout')
+    url(r'^logout/$', views.logOut, name='logout'),
+
+    url(r'^restaurent/', views.RestaurentListView.as_view(), name='restaurent'),
 ]

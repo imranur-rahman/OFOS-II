@@ -1,11 +1,14 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import Http404
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
+from django.db.models import Q
 from .forms import UserLoginForm, UserRegistrationForm
-from .models import Customer
+from .models import Customer, Area, Restaurent
 
 
 def logOut(request):
@@ -85,3 +88,19 @@ class UserRegistrationFormView(View):
                 return redirect('user:index')
 
         return HttpResponse("Could not register")
+
+
+class RestaurentListView(View):
+
+    def get(self, request):
+        query = request.GET.get("q")
+        queryset_list = {}
+        if query:
+            queryset_list = Restaurent.objects.filter(Q(name__icontains=query) |
+                                                      Q(area__name__contains=query))
+
+        context = {
+            'object_list': queryset_list,
+        }
+
+        return render(request, 'user/restaurents.html', context)

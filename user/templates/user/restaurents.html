@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'user/base.html' %}
+{% block content %}
+
+
+
+
+<div class="container-fluid">
+    <form method='GET' action='' class="navbar-form text-center">
+        <input type='text' name='q' placeholder='Search restaurent' value='{{ request.GET.q }}'/>
+        <input type='submit' value='Search' />
+    </form>
+</div>
+
+
+
+<div class='col-sm-6 col-sm-offset-3'>
+{% for obj in object_list %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+        {% if obj %}
+            <p class="dashboard">{{ obj }}</p>
+        {% endif %}
+    </div>
+    </div>
+  </div>
+{% endfor %}
+<hr/>
+</div>
+
+
+{% endblock %}
