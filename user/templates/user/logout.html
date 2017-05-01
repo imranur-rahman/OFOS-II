@@ -1,0 +1,32 @@
+{% extends 'user/base.html' %}
+
+{% block content %}
+
+    <!--banner-->
+    <div class="banner-top">
+        <div class="container">
+            <h2 class="animated wow fadeInLeft" data-wow-delay=".5s">Log Out</h2>
+            <h3 class="animated wow fadeInRight" data-wow-delay=".5s"><a href="{% url 'user:index' %}">Home</a><label>/</label>Log Out</h3>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <!--banner->
+
+    <!-- contact -->
+	<div class="login">
+		<div class="container">
+
+            <h1 class="animated wow fadeInDown" data-wow-delay="0.5s">You have been logged out successfully.</h1>
+            <h2 class="animated wow fadeInUp" data-wow-dalay="0.5s">Redirecting to Home Page.</h2>
+
+	    </div>
+	</div>
+    <!-- ei porjonto -->
+    <script>
+        function redirect(){
+           window.location.href = "{% url 'user:index' %}";
+        }
+
+        setTimeout(redirect, 3000); //2000 is equivalent to 2 seconds
+    </script>
+{% endblock %}
