@@ -76,7 +76,14 @@ class UserRegistrationFormView(View):
         email = form.cleaned_data['email']
         user.set_password(password)
 
+        user.first_name = first_name
+        user.last_name = last_name
+
         user.save()
+
+        #print(form.is_valid())
+
+        #print("register: "+first_name+last_name+username+email+password)
 
         # returns user object if credentials are correct
         user = authenticate(request, first_name=first_name, last_name=last_name, username=username, password=password, email=email)
