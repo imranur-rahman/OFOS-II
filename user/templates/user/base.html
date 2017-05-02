@@ -59,6 +59,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                         <div class="header-right1 ">
                             <ul>
+                                <li><i class="glyphicon glyphicon-search"></i><a href="{% url 'user:restaurent' %}">Search</a></li>
                                 {% if user.is_authenticated == False %}
                                     <li><i class="glyphicon glyphicon-log-in" ></i><a href="{% url 'user:login' %}">Login</a></li>
                                     <li><i class="glyphicon glyphicon-book" ></i><a href="{% url 'user:register' %}">Register</a></li>

@@ -14,18 +14,17 @@
 
 
 <div class='col-sm-6 col-sm-offset-3'>
-{% for obj in object_list %}
-<div class="row">
-  <div class="col-sm-12">
-    <div class="thumbnail">
-        {% if obj %}
-            <p class="dashboard">{{ obj }}</p>
-        {% endif %}
-    </div>
-    </div>
-  </div>
-{% endfor %}
-<hr/>
+    {% for obj in object_list %}
+        <div class="list-group-item-info">
+            <div class="col-sm-12">
+                <div class="animated wow fadeInLeftBig" data-wow-delay=".5s">
+                    {% if obj %}
+                        <p class="list-group-item">{{ obj }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 
