@@ -19,14 +19,15 @@
             {% csrf_token %}
 			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
 
-				<div class="login-mail">
-					<input type="text" placeholder="Username" aria-required="true" data-target=" {{ form.username }} " >
-					<i class="glyphicon glyphicon-envelope"></i>
-				</div>
-				<div class="login-mail">
-					<input type="password" placeholder="Password" aria-required="true" data-target=" {{ form.password }} " >
-					<i class="glyphicon glyphicon-lock"></i>
-				</div>
+                <div class="container-fluid">
+				    {{ form.username }}
+                </div>
+                <div style="padding: 20px"></div>
+                <div class="container-fluid">
+                    {{ form.password }}
+                </div>
+                <div style="padding: 20px"></div>
+
 
                 <a class="news-letter " href="#">
                     <label class="checkbox1"><input type="checkbox" name="checkbox" ><i> </i>Forgot Password</label>

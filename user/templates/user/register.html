@@ -15,30 +15,30 @@
 		<form method="POST">
             {% csrf_token %}
 			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
-                <div class="login-mail">
-					<input type="text" placeholder="Fisrt Name" required="" data-target="{{ form.first_name }}">
-					<i class="glyphicon glyphicon-file"></i>
+                <div class="container-fluid">
+					{{ form.first_name }}
 				</div>
-                <div class="login-mail">
-					<input type="text" placeholder="Last Name" required="" data-target="{{ form.last_name }}">
-					<i class="glyphicon glyphicon-file"></i>
+                <div style="padding: 20px"></div>
+                <div class="container-fluid">
+					{{ form.last_name }}
 				</div>
-				<div class="login-mail">
-					<input type="text" placeholder="Email" required="" data-target="{{ form.email }}">
-					<i class="glyphicon glyphicon-envelope"></i>
+                <div style="padding: 20px"></div>
+				<div class="container-fluid">
+					{{ form.email }}
 				</div>
-                <div class="login-mail">
-					<input type="text" placeholder="Username" required="" data-target="{{ form.username }}">
-					<i class="glyphicon glyphicon-user"></i>
+                <div style="padding: 20px"></div>
+                <div class="container-fluid">
+					{{ form.username }}
 				</div>
-				<div class="login-mail">
-					<input type="password" placeholder="Password" required="" data-target="{{ form.password }}">
-					<i class="glyphicon glyphicon-lock"></i>
+                <div style="padding: 20px"></div>
+				<div class="container-fluid">
+					{{ form.password }}
 				</div>
-				<div class="login-mail">
-					<input type="password" placeholder="Repeated password" required="">
-					<i class="glyphicon glyphicon-lock"></i>
+                <div style="padding: 20px"></div>
+				<div class="container-fluid">
+					{{ form.dummy_password }}
 				</div>
+                <div style="padding: 20px"></div>
                 <a class="news-letter" href="#">
                     <label class="checkbox1"><input type="checkbox" name="checkbox" required="" ><i> </i>I agree with the terms</label>
                 </a>
