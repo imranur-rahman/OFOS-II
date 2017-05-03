@@ -18,7 +18,12 @@
 		<form method="POST">
             {% csrf_token %}
 			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
-
+                {% if error %}
+                    <div class="main-container alert-danger">
+                        {{ error }}
+                    </div>
+                    <div style="padding: 20px"></div>
+                {% endif %}
                 <div class="container-fluid">
 				    {{ form.username }}
                 </div>

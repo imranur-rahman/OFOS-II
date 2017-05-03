@@ -32,7 +32,10 @@ class UserLoginFormView(View):
     def get(self, request):
         form = self.form_class(None)
         # print("get", form)
-        return render(request, self.template_name, {'form': form})
+        return render(request, self.template_name, {
+            'form': form,
+            'error': '',
+        })
 
     # process form data
     def post(self, request):
@@ -40,6 +43,8 @@ class UserLoginFormView(View):
 
         username = request.POST.get("username")
         password = request.POST.get("password")
+        #username = form.cleaned_data['username']
+        #password = form.cleaned_data['password']
         user = authenticate(request, username=username, password=password)
         print(username, password)
 
@@ -48,7 +53,11 @@ class UserLoginFormView(View):
                 login(request, user)
                 return redirect('user:index')
         else:
-            return HttpResponse("Not signed in")
+            error = 'Wrong username password combination!'
+            return render(request, self.template_name, {
+                'form': form,
+                'error': error,
+            })
 
 
 class UserRegistrationFormView(View):
@@ -66,35 +75,32 @@ class UserRegistrationFormView(View):
 
         form = self.form_class(request.POST)
 
-        user = form.save(commit=False)
+        if form.is_valid():
 
-        # cleaned (neutralized) data
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        email = form.cleaned_data['email']
-        user.set_password(password)
+            user = form.save(commit=False)
 
-        user.first_name = first_name
-        user.last_name = last_name
+            # cleaned (neutralized) data
+            first_name = form.cleaned_data['first_name']
+            last_name = form.cleaned_data['last_name']
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            email = form.cleaned_data['email']
+            user.set_password(password)
 
-        user.save()
+            user.save()
 
-        #print(form.is_valid())
+            # print("register: "+first_name+last_name+username+email+password)
 
-        #print("register: "+first_name+last_name+username+email+password)
+            # returns user object if credentials are correct
+            user = authenticate(request, first_name=first_name, last_name=last_name, username=username, password=password, email=email)
 
-        # returns user object if credentials are correct
-        user = authenticate(request, first_name=first_name, last_name=last_name, username=username, password=password, email=email)
+            if user is not None:
 
-        if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('user:index')
 
-            if user.is_active:
-                login(request, user)
-                return redirect('user:index')
-
-        return HttpResponse("Could not register")
+        return render(request, self.template_name, {'form': form})
 
 
 class RestaurentListView(View):
