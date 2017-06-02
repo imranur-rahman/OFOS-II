@@ -12,5 +12,11 @@ urlpatterns = [
 
     url(r'^logout/$', views.logOut, name='logout'),
 
-    url(r'^restaurent/', views.RestaurentListView.as_view(), name='restaurent'),
+    url(r'^restaurants/$', views.RestaurantListView.as_view(), name='restaurants'),
+
+    url(r'^restaurant/(?P<id>\d+)/$', views.RestaurantView.as_view(), name='restaurant'),
+
+    url(r'^foods/$', views.AllFoodView.as_view(), name='foods'),
+
+    url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
 ]

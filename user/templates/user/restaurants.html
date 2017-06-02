@@ -1,0 +1,52 @@
+{% extends 'user/base.html' %}
+{% block content %}
+
+
+<div class="container-fluid">
+    <form method='GET' action='' class="navbar-form text-center">
+        <input type='text' name='q' placeholder='Search restaurent' value='{{ request.GET.q }}'/>
+        <input type='submit' value='Search' />
+    </form>
+</div>
+
+<style>
+    table {
+        table-layout: auto;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 800px;
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+    table td {
+        border: 1px seashell;
+        padding: 30px 10px;
+        text-align: center;
+        font-family: Cabin;
+        font-size: larger;
+    }
+    table tr {
+        border: 3px solid saddlebrown;
+        background: #c9ffcb;
+    }
+    table .absorbing-column {
+        width: 100%;
+    }
+    #wrapper {
+        width: 600px;
+        margin: 50px;
+    }
+</style>
+
+
+<table>
+    {% for obj in object_list %}
+        <tr>
+            <td><a href="{% url 'user:restaurant' id=obj.id %}">{{ obj.name }}</a></td>
+            <td>{{ obj.area }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+{% endblock %}

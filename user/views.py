@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from django.db.models import Q
 from .forms import UserLoginForm, UserRegistrationForm
-from .models import Customer, Area, Restaurent
+from .models import Customer, Area, Restaurant, Food
 
 
 def logOut(request):
@@ -103,17 +103,47 @@ class UserRegistrationFormView(View):
         return render(request, self.template_name, {'form': form})
 
 
-class RestaurentListView(View):
+class RestaurantListView(View):
 
     def get(self, request):
+
         query = request.GET.get("q")
         queryset_list = {}
         if query:
-            queryset_list = Restaurent.objects.filter(Q(name__icontains=query) |
+            queryset_list = Restaurant.objects.filter(Q(name__icontains=query) |
                                                       Q(area__name__contains=query))
 
         context = {
             'object_list': queryset_list,
         }
 
-        return render(request, 'user/restaurents.html', context)
+        return render(request, 'user/restaurants.html', context)
+
+
+class RestaurantView(View):
+
+    def get(self, request, id):
+
+        queryset = Food.objects.filter(restaurant__pk=id)
+        context = {
+            'object_list': queryset,
+        }
+        return render(request, 'user/restaurant.html', context)
+
+
+class AllFoodView(View):
+
+    def get(self, request):
+
+        queryset = Food.objects.all()
+        context = {
+            'object_list': queryset,
+        }
+        return render(request, 'user/foods.html', context)
+
+
+class CheckoutView(View):
+
+    def get(self, request):
+
+        return render(request, 'user/checkout.html', {})

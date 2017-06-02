@@ -25,11 +25,55 @@ class Area(models.Model):
         return self.name.__str__()
 
 
-class Restaurent(models.Model):
+class Rating(models.Model):
+    number_of_users_rated = models.IntegerField()
+    sum_of_rating = models.IntegerField()
+    average = models.FloatField(default=0.0)
+
+
+class Restaurant(models.Model):
     name = models.CharField(max_length=30)
-    area = models.ForeignKey(Area)
+    area = models.ForeignKey(Area, on_delete=models.CASCADE)
     open_time = models.TimeField()
     close_time = models.TimeField()
+    rating = models.ForeignKey(Rating, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.name.__str__() + ', ' + self.area.name.__str__()
+
+
+class Food(models.Model):
+    CUISINES = (
+        ('MF', 'Mexican Food'),
+        ('IC', 'Italian Cuisine'),
+        ('IF', 'Indian Food'),
+        ('CF', 'Cajun Food'),
+        ('SF', 'Soul Food'),
+        ('TF', 'Thai Food'),
+        ('GF', 'Greek Cuisine'),
+        ('CHF', 'Chinese Food'),
+        ('LC', 'Lebanese Cuisine'),
+        ('JC', 'Japanese Cuisine'),
+        ('AF', 'American Food'),
+        ('MF', 'Moroccan Food'),
+        ('MC', 'Mediterranean Cuisine'),
+        ('FF', 'French Food'),
+        ('SC', 'Spanish Cuisine'),
+        ('GF', 'German Food'),
+        ('KF', 'Korean Food'),
+        ('VF', 'Vietnamese Food'),
+        ('TC', 'Turkish Cuisine'),
+        ('CRF', 'Caribbean Food'),
+    )
+
+    name = models.CharField(max_length=30)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    price = models.FloatField()
+    time_needed = models.DurationField()
+    category = models.CharField(max_length=3, choices=CUISINES)
+    rating = models.ForeignKey(Rating)
+    image1 = models.FileField(null=True, blank=True)
+    image2 = models.FileField(null=True, blank=True)
+
+    def __str__(self):
+        return '{}  {}  {}'.format(self.name, self.restaurant.name, self.time_needed.__str__())

@@ -27,3 +27,32 @@
     </span>
 </div>
 
+
+
+{% for obj in object_list %}
+        <a href="{% url 'user:restaurant' id=obj.id %}">
+            {{ obj }}
+        </a>
+{% endfor %}
+
+
+
+{% for obj in object_list %}
+    <div class="col-sm-6 col-sm-offset-3 list-group-item-info">
+        <div class="col-sm-12 list-group-item">
+
+                    <div class="col-md-5">
+                        <a href="{% url 'user:restaurant' id=obj.id %}">
+
+                            {{ obj.name }}
+
+                        </a>
+                    </div>
+                    <div class="col-md-7">
+                        {{ obj.area }}
+                    </div>
+
+        </div>
+    </div>
+{% endfor %}
+
