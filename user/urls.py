@@ -19,4 +19,6 @@ urlpatterns = [
     url(r'^foods/$', views.AllFoodView.as_view(), name='foods'),
 
     url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
+
+    url(r'^addtocart/(?P<food_id>\d+)/$', views.add_to_cart, name='add_to_cart'),
 ]

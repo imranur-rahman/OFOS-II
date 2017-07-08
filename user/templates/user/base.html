@@ -28,6 +28,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- cart -->
 <script src="../../static/user/js/simpleCart.min.js"></script>
 <!-- cart -->
+
+<script type="text/javascript" src="../../static/user/js/simpleCart.js">
+    simpleCart.cartHeaders = ["Name" , "Size", "Price" , "decrement" , "Quantity", "increment", "remove", "Total", "foodid" ];
+</script>
+
 <!-- for bootstrap working -->
 <script type="text/javascript" src="../../static/user/js/bootstrap-3.1.1.min.js"></script>
 <!-- //for bootstrap working -->
@@ -40,7 +45,27 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //animation-effect -->
 <link href='//fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>
 <link href='//fonts.googleapis.com/css?family=Lato:400,100,300,700,900' rel='stylesheet' type='text/css'>
+
+
+<script type="text/javascript">
+    simpleCart({
+        cartColumns: [
+            { attr: "name" , label: "Name" } ,
+            { attr: "price" , label: "Price", view: 'currency' } ,
+            { view: "decrement" , label: false , text: "-" } ,
+            { attr: "quantity" , label: "Qty" } ,
+            { view: "increment" , label: false , text: "+" } ,
+            { attr: "total" , label: "SubTotal", view: 'currency' } ,
+            { view: "remove" , text: "Remove" , label: false },
+            { attr: "foodid" , label: "foodid" }
+        ],
+
+        cartStyle: "div",
+    });
+</script>
+
 </head>
+
 
 <body>
 <!-- header -->

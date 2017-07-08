@@ -56,3 +56,15 @@
     </div>
 {% endfor %}
 
+
+
+
+<form action="{% url 'user:add_to_cart' %}" method="POST">
+                                        <input hidden id="" type="button" value="{{ food.id }}"/>
+                                        <a value="{{ forloop.counter }}" id="{{ forloop.counter }}"
+                                           href="{% url 'user:add_to_cart' %}" data-text="Add To Cart"
+                                           class="but-hover1 item_add" onclick="func(this)">Add To Cart</a>
+                                    </form>
+
+
+{% url 'user:add_to_cart' %}

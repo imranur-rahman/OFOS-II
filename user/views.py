@@ -9,11 +9,33 @@ from django.views.generic import View
 from django.db.models import Q
 from .forms import UserLoginForm, UserRegistrationForm
 from .models import Customer, Area, Restaurant, Food
+from django.contrib.sessions.models import Session
 
 
 def logOut(request):
     logout(request)
     return render(request, 'user/logout.html')
+
+
+def add_to_cart(request, food_id):
+
+    print('in add to cart')
+    query = food_id
+    print(request.session['username'])
+    print(food_id)
+
+    queryset_list = {}
+    if query:
+        '''queryset_list = Restaurant.objects.filter(Q(name__icontains=query) |
+                                                  Q(area__name__contains=query))'''
+        print('add to cart is' + query)
+
+    context = {
+        'object_list': queryset_list,
+    }
+
+    #return render(request, 'user/foods.html', context)
+    return redirect('user:foods')
 
 
 class IndexView(generic.ListView):
@@ -51,6 +73,7 @@ class UserLoginFormView(View):
         if user is not None:
             if user.is_active:
                 login(request, user)
+                request.session['username'] = username
                 return redirect('user:index')
         else:
             error = 'Wrong username password combination!'
@@ -138,7 +161,9 @@ class AllFoodView(View):
         queryset = Food.objects.all()
         context = {
             'object_list': queryset,
+            'which_to_add': "",
         }
+        request.session['food_to_be_added'] = '0'
         return render(request, 'user/foods.html', context)
 
 
@@ -146,4 +171,8 @@ class CheckoutView(View):
 
     def get(self, request):
 
-        return render(request, 'user/checkout.html', {})
+        queryset = {}
+        context = {
+            'object_list': queryset,
+        }
+        return render(request, 'user/checkout.html', context)

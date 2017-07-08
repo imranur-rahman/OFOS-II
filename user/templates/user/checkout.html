@@ -1,5 +1,7 @@
 {% extends 'user/base.html' %}
 {% block content %}
+
+
 <!--banner-->
 <div class="banner-top">
 	<div class="container">
@@ -150,6 +152,40 @@
 			</script>
 			<!--quantity-->
 
-    <div class="simpleCart_items"></div>
+    <div class="col-md-3">
+        <div class="simpleCart_items"></div>
+    </div>
+
+<script type="text/javascript">
+
+    function printCart() {
+        var items = [];
+        simpleCart.each(
+            function ( item, x ) {
+                items.push( item.price );
+            }
+        );
+        console.log( items );
+    }
+
+    function doStuff(x, y) {
+        console.log(x * y);
+    }
+
+    printCart();
+    doStuff(3, 4);
+
+
+	simpleCart.email = "email@venditore.ext";
+	//simpleCart.checkoutTo = PayPal;
+    //simpleCart.currency = EUR;
+	//simpleCart.taxRate  = 0.00;
+	simpleCart.shippingFlatRate = 15.00;
+
+	simpleCart.cartHeaders = ["Name" , "Size", "Price" , "decrement" , "Quantity", "increment", "remove", "Total" ];
+
+
+</script>
+
 
 {% endblock %}

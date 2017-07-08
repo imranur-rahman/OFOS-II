@@ -148,9 +148,15 @@
 								<div class="women">
 									<a href="#"><img src="../../static/user/images/ll.png" alt=""></a>
 									<h6><a href="single.html">{{ food.name }}</a></h6>
+                                    <p class="hidden"><div class="item_name">{{ food.name }}</div></p>
                                     <p class="text-center">{{ food.restaurant.name }}, {{ food.restaurant.area.name }}</p>
 									<p ><del>${{ food.price }}</del><em class="item_price">${{ food.price }}</em></p>
-									<a href="#" data-text="Add To Cart" class="but-hover1 item_add">Add To Cart</a>
+                                    <p class="hidden"><div class="item_foodid">{{ food.id }}</div> </p>
+
+                                    <a value="{{ forloop.counter }}" id="{{ food.id }}"
+                                           href="{% url 'user:add_to_cart' food.id %}" data-text="Add To Cart"
+                                           class="but-hover1 item_add" onclick="func(this.id)">
+                                        Add To Cart</a>
 								</div>
 							</div>
 						</div>
@@ -164,5 +170,31 @@
 			<div class="clearfix"></div>
     </div>
 </div>
+
+<script>
+$(function(){
+     $('form').on('addtocart', function(e){
+         e.preventDefault();
+         $.ajax({
+             url: $(this).attr('action'),
+             method: $(this).attr('method'),
+             success: function(data){ $('#target').html(data) }
+         });
+     });
+});
+</script>
+<script type="text/javascript">
+function  func(e) {
+    var sata = sessionStorage.getItem("food_to_be_added");
+    console.log(sata);
+    sessionStorage.setItem("food_to_be_added", e.toString());
+    var data = sessionStorage.getItem("food_to_be_added");
+    console.log(data);
+    console.log(e);
+    console.log(request.session.food_to_be_added);
+}
+</script>
+
+
 
 {% endblock %}
