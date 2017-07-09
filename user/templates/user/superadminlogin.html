@@ -1,0 +1,46 @@
+{% extends 'user/base2.html' %}
+{% block content %}
+
+        <div class="login">
+		<div class="container">
+		<form method="POST">
+            {% csrf_token %}
+			<div class="col-md-6 login-do1 animated wow fadeInLeft" data-wow-delay=".5s">
+                {% if error %}
+                    <div class="main-container alert-danger">
+                        {{ error }}
+                    </div>
+                    <div style="padding: 20px"></div>
+                {% endif %}
+                <div class="container-fluid">
+				    {{ form.username }}
+                </div>
+                <div style="padding: 20px"></div>
+                <div class="container-fluid">
+                    {{ form.password }}
+                </div>
+                <div style="padding: 20px"></div>
+
+
+                <a class="news-letter " href="#">
+                    <label class="checkbox1"><input type="checkbox" name="checkbox" ><i> </i>Forgot Password</label>
+                </a>
+
+
+			</div>
+			<div class="col-md-6 login-do animated wow fadeInRight" data-wow-delay=".5s">
+				<label class="hvr-sweep-to-top login-sub">
+                        <input type="submit" value="login">
+                </label>
+
+                <p>Do not have an account?</p>
+				<a href="{% url 'user:register' %}" class="hvr-sweep-to-top">Signup</a>
+			</div>
+
+			<div class="clearfix"> </div>
+        </form>
+
+	    </div>
+	</div>
+
+{% endblock %}

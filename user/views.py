@@ -166,7 +166,22 @@ class AllFoodView(View):
 
     def get(self, request):
 
+        keyword = request.GET.get("keyword")
+        price_min = request.GET.get("price_min")
+        price_max = request.GET.get("price_max")
+
         queryset = Food.objects.all()
+
+        if keyword is not None:
+            queryset = queryset.filter(name__contains=keyword)
+            print("keyword is not none")
+        if price_min is not None:
+            queryset = queryset.filter(price__lt=price_min)
+            print("price_min is not none")
+        if price_max is not None:
+            queryset = queryset.filter(price__gt=price_max)
+            print("price_max is not none")
+
         context = {
             'object_list': queryset,
             'which_to_add': "",
@@ -184,9 +199,56 @@ class CheckoutView(View):
         '''for i in items:
             queryset += i.food_id
         print(queryset)'''
-        queryset = items
+        list = []
+        for i in items:
+            list += str(i.food_id)
+        print(list)
+        queryset = Food.objects.filter(pk__in=list)
         print(queryset)
+
+        total_price = 0
+        for i in queryset:
+            total_price += i.price
+
         context = {
             'object_list': queryset,
+            'total_price': total_price,
         }
         return render(request, 'user/checkout.html', context)
+
+
+class SuperAdminLoginFormView(View):
+    form_class = UserLoginForm
+    template_name = 'user/superadminlogin.html'
+
+    # display blank line
+    def get(self, request):
+        form = self.form_class(None)
+        # print("get", form)
+        return render(request, self.template_name, {
+            'form': form,
+            'error': '',
+        })
+
+    # process form data
+    def post(self, request):
+        form = self.form_class(request.POST)
+
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        #username = form.cleaned_data['username']
+        #password = form.cleaned_data['password']
+        user = authenticate(request, username=username, password=password)
+        print(username, password)
+
+        if user is not None:
+            if user.is_active and user.is_superuser:
+                login(request, user)
+                request.session['username'] = username
+                return redirect('user:superadminindex')
+        else:
+            error = 'Wrong username password combination!'
+            return render(request, self.template_name, {
+                'form': form,
+                'error': error,
+            })

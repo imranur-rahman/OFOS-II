@@ -21,4 +21,6 @@ urlpatterns = [
     url(r'^checkout/$', views.CheckoutView.as_view(), name='checkout'),
 
     url(r'^addtocart/(?P<food_id>\d+)/$', views.add_to_cart, name='add_to_cart'),
+
+    url(r'^superadminlogin/$', views.SuperAdminLoginFormView.as_view(), name='superadminlogin'),
 ]

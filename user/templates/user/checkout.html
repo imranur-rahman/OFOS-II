@@ -1,4 +1,5 @@
 {% extends 'user/base.html' %}
+{% load app_filters %}
 {% block content %}
 
 
@@ -45,72 +46,46 @@
 			<th class="t-head">Quantity</th>
 			<th class="t-head">Total</th>
 		  </tr>
-		  <tr class="cross">
+
+
+
+
+
+
+        {% for food in object_list %}
+            <tr class="cross">
 			<td class="ring-in t-data">
 				<a href="single.html" class="at-in">
-					<img src="../../static/user/images/pcc.jpg" class="img-responsive" alt="">
+					<img src="{{ food.image1.url }}" class="img-responsive" alt="">
 				</a>
 			<div class="sed">
-				<h5>Sed ut perspiciatis unde</h5>
+				<h5>{{ food.name }}</h5>
 			</div>
 				<div class="clearfix"> </div>
 				<div class="close1"> </div>
 			 </td>
-			<td class="t-data">$100.00</td>
-			<td class="t-data"><div class="quantity"> 
-								<div class="quantity-select">            
+			<td class="t-data">{{ food.price }}</td>
+			<td class="t-data"><div class="quantity">
+								<div class="quantity-select">
 									<div class="entry value-minus">&nbsp;</div>
-										<div class="entry value"><span class="span-1">1</span></div>									
+										<div class="entry value"><span class="span-1">1</span></div>
 									<div class="entry value-plus active">&nbsp;</div>
 								</div>
 							</div>
-			
+
 			</td>
-			<td class="t-data">$100.00</td>
-			
-		  </tr>
-		  <tr class="cross1">
-		  <td class="t-data ring-in"><a href="single.html" class="at-in"><img src="../../static/user/images/pcc2.jpg" class="img-responsive" alt=""></a>
-			<div class="sed">
-				<h5>Sed ut perspiciatis unde</h5>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="close2"> </div></td>
-			<td class="t-data">$200.00</td>
-			<td class="t-data"><div class="quantity"> 
-								<div class="quantity-select">            
-									<div class="entry value-minus">&nbsp;</div>
-										<div class="entry value"><span class="span-1">1</span></div>									
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-							<!--quantity-->
-		
-			</td>
-			<td class="t-data">$200.00</td>
-			
-		  </tr>
-		  <tr class="cross2">
-		  <td class="t-data ring-in"><a href="single.html" class="at-in"><img src="../../static/user/images/pcc1.jpg" class="img-responsive" alt=""></a>
-			<div class="sed">
-				<h5>Sed ut perspiciatis unde</h5>
-			</div>
-			<div class="clearfix"> </div>
-			<div class="close3"> </div></td>
-			<td class="t-data">$150.00</td>
-			<td class="t-data">
-				<div class="quantity"> 
-								<div class="quantity-select">            
-									<div class="entry value-minus">&nbsp;</div>
-										<div class="entry value"><span class="span-1">1</span></div>									
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-						
-			</td>
-			<td class="t-data">$150.00</td>
-			
-		  </tr>
+			<td class="t-data">{{ food.price }}</td>
+
+		    </tr>
+        {% endfor %}
+
+
+
+
+
+
+
+
 	</table>
 				<div class=" cart-total">
 			
@@ -118,7 +93,7 @@
 			 <div class="price-details">
 				 <h3>Price Details</h3>
 				 <span>Total</span>
-				 <span class="total1">6200.00</span>
+				 <span class="total1">{{ total_price }}</span>
 				 <span>Discount</span>
 				 <span class="total1">---</span>
 				 <span>Delivery Charges</span>
@@ -127,7 +102,7 @@
 			 </div>	
 			 <ul class="total_price">
 			   <li class="last_price"> <h4>TOTAL</h4></li>	
-			   <li class="last_price"><span><div class="simpleCart_grandTotal"></div></span></li>
+			   <li class="last_price"><span>{{ total_price | add:150 }}</span></li>
 			   <div class="clearfix"> </div>
 			 </ul>
 			

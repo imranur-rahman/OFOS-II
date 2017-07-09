@@ -30,23 +30,52 @@
 					</ul>
 				</div>
 		<!--//menu-->
+
+
+                     <div class="categories animated wow fadeInUp animated" data-wow-delay=".5s" >
+                        <h3>Search</h3>
+
+                         <div class="color-top">
+                             <form method='GET' action='' class="navbar-form text-center">
+                                 <input type='text' name='keyword' placeholder='Search food' value='{{ request.GET.keyword }}'/>
+                                 <input type='submit' value='Search' />
+                             </form>
+                         </div>
+
+                     </div>
+
+
+
 		<!--price-->
+
+
+
 				<div class="price animated wow fadeInUp animated" data-wow-delay=".5s" >
 					<h3>Price Range</h3>
 					<div class="price-head">
-					<div class="col-md-6 price-head1">
+                        <form method='GET' action=''>
+					        <div class="col-md-6 price-head1">
+
                                         <div class="price-top1">
                                             <span class="price-top">$</span>
-                                            <input type="text"  value="0">
+
+                                            <input type="text" name="price_min" placeholder='0' value='{{ request.GET.price_min }}'>
+
                                         </div>
                                     </div>
 									<div class="col-md-6 price-head2">
                                         <div class="price-top1">
                                             <span class="price-top">$</span>
-                                            <input type="text"  value="500">
+                                            <form method='GET' action=''>
+                                            <input type="text" name="price_max" placeholder='500' value='{{ request.GET.price_max }}'>
+                                            </form>
                                         </div>
                                     </div>
 									<div class="clearfix"></div>
+
+                                <input type='submit' value='Submit' />
+
+                        </form>
                                     </div>
                                     </div>
 			<!--//price-->
