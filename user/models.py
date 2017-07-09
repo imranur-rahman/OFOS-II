@@ -101,3 +101,25 @@ class Food(models.Model):
 
     def __str__(self):
         return '{}  {}  {}'.format(self.name, self.restaurant.name, self.time_needed.__str__())
+
+
+class Employee(models.Model):
+    name = models.CharField(max_length=30)
+    is_free = models.BooleanField(default=True)
+
+
+class NewOrders(models.Model):
+    cart_items = models.CharField(max_length=500)
+    employee_id = models.PositiveIntegerField(null=True)
+    customer_username = models.CharField(max_length=100, null=True)
+    order_time = models.DateTimeField(null=True)
+    total_price = models.PositiveIntegerField(null=True)
+    address = models.CharField(max_length=300, null=True)
+
+
+class CompletedOrders(models.Model):
+    cart_items = models.CharField(max_length=500)
+    employee_id = models.PositiveIntegerField()
+    customer_id = models.PositiveIntegerField()
+    order_time = models.DateTimeField()
+    delivered_time = models.DateTimeField()

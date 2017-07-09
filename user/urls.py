@@ -22,5 +22,13 @@ urlpatterns = [
 
     url(r'^addtocart/(?P<food_id>\d+)/$', views.add_to_cart, name='add_to_cart'),
 
+    url(r'^placeorder/$', views.place_order, name='place_order'),
+
     url(r'^superadminlogin/$', views.SuperAdminLoginFormView.as_view(), name='superadminlogin'),
+
+    url(r'^superadminindex/$', views.SuperAdminIndexView.as_view(), name='superadminindex'),
+
+    url(r'^superadminneworders/$', views.SuperAdminNewOrdersView.as_view(), name='superadminneworders'),
+
+    url(r'^superadminchartjs/$', views.SuperAdminChartJsView.as_view(), name='superadminchartjs'),
 ]

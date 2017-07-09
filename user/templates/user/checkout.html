@@ -87,6 +87,11 @@
 
 
 	</table>
+
+
+
+
+
 				<div class=" cart-total">
 			
 			 <h5 class="continue" >Cart Total</h5>
@@ -107,6 +112,14 @@
 			 </ul>
 			
 			 <a href="single.html">Place Order</a>
+
+
+                <form method='POST' action='' class="navbar-form text-center">
+                     {% csrf_token %}
+                     <input type='text' name='address' placeholder='Address'/>
+                     <input type='submit' value='Place Order' />
+                 </form>
+
 			 
 			</div>
 			
@@ -127,9 +140,6 @@
 			</script>
 			<!--quantity-->
 
-    <div class="col-md-3">
-        <div class="simpleCart_items"></div>
-    </div>
 
 <script type="text/javascript">
 
@@ -147,7 +157,7 @@
         console.log(x * y);
     }
 
-    printCart();
+    //printCart();
     doStuff(3, 4);
 
 
