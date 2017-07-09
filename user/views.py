@@ -8,7 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.views.generic import View
 from django.db.models import Q
 from .forms import UserLoginForm, UserRegistrationForm
-from .models import Customer, Area, Restaurant, Food
+from .models import Customer, Area, Restaurant, Food, Cart, CartItem
+from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 
 
@@ -21,6 +22,7 @@ def add_to_cart(request, food_id):
 
     print('in add to cart')
     query = food_id
+    username = request.session['username']
     print(request.session['username'])
     print(food_id)
 
@@ -29,6 +31,12 @@ def add_to_cart(request, food_id):
         '''queryset_list = Restaurant.objects.filter(Q(name__icontains=query) |
                                                   Q(area__name__contains=query))'''
         print('add to cart is' + query)
+        u = User.objects.get(username=username)
+
+        c = CartItem(food_id=food_id)
+        c.cart = u.cart
+        c.save()
+        u.save()
 
     context = {
         'object_list': queryset_list,
@@ -171,7 +179,13 @@ class CheckoutView(View):
 
     def get(self, request):
 
+        items = CartItem.objects.filter(cart__user__username=request.session['username'])
         queryset = {}
+        '''for i in items:
+            queryset += i.food_id
+        print(queryset)'''
+        queryset = items
+        print(queryset)
         context = {
             'object_list': queryset,
         }

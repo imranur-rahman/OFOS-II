@@ -2,6 +2,30 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+
+class Cart(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+@receiver(post_save, sender=User)
+def create_cart(sender, instance, created, **kwargs):
+    if created:
+        Cart.objects.create(user=instance)
+
+
+@receiver(post_save, sender=User)
+def save_cart(sender, instance, **kwargs):
+    instance.cart.save()
+
+
+class CartItem(models.Model):
+    food_id = models.IntegerField()
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
 
 
 class Customer(models.Model):
