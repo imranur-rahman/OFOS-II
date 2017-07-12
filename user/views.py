@@ -349,7 +349,7 @@ class SuperAdminChartJsView(View):
 
 
         #labels = ["12 AM - 6 AM", "6 AM - 12 PM", "12 PM - 6 PM", "6 PM - 12 AM"]
-        labels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        labels = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"]
 
         #print(NewOrders.objects.filter(order_time__week_day__range=[0, 6]))
         print(labels)
